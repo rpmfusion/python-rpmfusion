@@ -8,7 +8,7 @@ and FAS2.\
 
 Name:           python-rpmfusion
 Version:        1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 BuildArch:      noarch
 
 License:        LGPLv2+
@@ -90,6 +90,9 @@ rm -rf %{buildroot}%{python3_sitelib}/tests/
 %{python3_sitelib}/python_fedora*egg-info
 
 %changelog
+* Wed Mar 19 2025 Leigh Scott <leigh123linux@gmail.com> - 1.2-2
+- rebuilt
+
 * Wed Mar 19 2025 Sérgio Basto <sergio@serjux.com> - 1.2-1
 - rpmfusion version
 
