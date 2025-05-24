@@ -1,5 +1,3 @@
-#%%global prerel c2
-
 %global desc Python modules that help with building Fedora Services.  The client module\
 included here can be used to build programs that communicate with many\
 Fedora Infrastructure Applications such as Bodhi, PackageDB, MirrorManager,\
@@ -7,8 +5,8 @@ and FAS2.\
 
 
 Name:           python-rpmfusion
-Version:        1.2
-Release:        2%{?dist}
+Version:        1.2.1
+Release:        1%{?dist}
 BuildArch:      noarch
 
 License:        LGPLv2+
@@ -16,16 +14,7 @@ Summary:        Python modules for talking to Fedora Infrastructure Services
 URL:            https://github.com/rpmfusion-infra/python-rpmfusion
 Source0:        https://github.com/rpmfusion-infra/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires:  python3-babel
-BuildRequires:  python3-devel
-BuildRequires:  python3-kitchen
-BuildRequires:  python3-lockfile
-BuildRequires:  python3-munch
-BuildRequires:  python3-openid
-BuildRequires:  python3-requests >= 2.6.0
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-six
-BuildRequires:  python3-sphinx
+BuildRequires:  gettext
 
 
 %description
@@ -34,13 +23,6 @@ BuildRequires:  python3-sphinx
 %package -n python3-rpmfusion
 Summary:        %{summary}
 
-Requires:       python3-beautifulsoup4
-Requires:       python3-kitchen
-Requires:       python3-lockfile
-Requires:       python3-munch
-Requires:       python3-openidc-client
-Requires:       python3-requests >= 2.6.0
-Requires:       python3-six
 Provides:       python3-fedora = %{version}-%{release}
 Obsoletes:      python3-fedora < %{version}-%{release}
 
@@ -53,43 +35,39 @@ Obsoletes:      python3-fedora < %{version}-%{release}
 
 %prep
 %autosetup -p1
+%generate_buildrequires
 
+%pyproject_buildrequires -p
 # https://bugzilla.redhat.com/show_bug.cgi?id=1329549
 grep "PO-Revision-Date: \\\\n" translations/*.po  -l | xargs rm -f
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1329539
 rm -f translations/{anp,bal,ilo,mai,nds,wba}.po
 
-# Pull in the old compat version of cherrypy to build the tg1 docs.
-cp setup.py setup_docs.py
-sed -i 's/import sys/import sys\n__requires__ = ["CherryPy < 3.0"]; import pkg_resources/' setup_docs.py
-
 
 %build
-%{__python3} setup.py build
-## No docs, because that tries to hit the tg pathways (py2-only)
-#%{__python3} setup.py build_sphinx
+%pyproject_wheel
 ## We can probably port releaseutils.py, but we haven't yet.
 %{__python3} releaseutils.py build_catalogs
 
 
 %install
-%{__python3} setup.py install --skip-build --root %{buildroot}
+%pyproject_install
 ## We can probably port releaseutils.py, but we haven't yet.
 DESTDIR=%{buildroot} %{__python3} releaseutils.py install_catalogs
 
-# Remove regression tests
-rm -rf %{buildroot}%{python3_sitelib}/fedora/wsgi/test
-rm -rf %{buildroot}%{python3_sitelib}/tests/
 
 %find_lang %{name}
 
 %files -f %{name}.lang -n python3-rpmfusion
 %license COPYING
 %{python3_sitelib}/fedora/
-%{python3_sitelib}/python_fedora*egg-info
+%{python3_sitelib}/python_rpmfusion*dist-info
 
 %changelog
+* Fri May 23 2025 Sérgio Basto <sergio@serjux.com> - 1.2.1-1
+- Update to 1.2.1
+
 * Wed Mar 19 2025 Leigh Scott <leigh123linux@gmail.com> - 1.2-2
 - rebuilt
 
