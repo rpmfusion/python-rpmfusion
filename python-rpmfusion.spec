@@ -5,7 +5,7 @@ and FAS2.\
 
 
 Name:           python-rpmfusion
-Version:        1.2.1
+Version:        1.2.2
 Release:        1%{?dist}
 BuildArch:      noarch
 
@@ -47,24 +47,21 @@ rm -f translations/{anp,bal,ilo,mai,nds,wba}.po
 
 %build
 %pyproject_wheel
-## We can probably port releaseutils.py, but we haven't yet.
-%{__python3} releaseutils.py build_catalogs
 
 
 %install
 %pyproject_install
-## We can probably port releaseutils.py, but we haven't yet.
-DESTDIR=%{buildroot} %{__python3} releaseutils.py install_catalogs
 
 
-%find_lang %{name}
-
-%files -f %{name}.lang -n python3-rpmfusion
+%files -n python3-rpmfusion
 %license COPYING
 %{python3_sitelib}/fedora/
 %{python3_sitelib}/python_rpmfusion*dist-info
 
 %changelog
+* Fri Jul 25 2025 Sérgio Basto <sergio@serjux.com> - 1.2.2-1
+- Update python-rpmfusion to 1.2.2
+
 * Fri May 23 2025 Sérgio Basto <sergio@serjux.com> - 1.2.1-1
 - Update to 1.2.1
 
