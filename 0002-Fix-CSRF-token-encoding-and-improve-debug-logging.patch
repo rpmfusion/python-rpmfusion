@@ -1,0 +1,44 @@
+From dc5344f0e7a2127b78052fa3c3be110dc8b56836 Mon Sep 17 00:00:00 2001
+From: Leigh Scott <leigh123linux@fedoraproject.org>
+Date: Thu, 11 Sep 2025 01:07:31 +0100
+Subject: [PATCH] Fix CSRF token encoding and improve debug logging
+
+Needed for python-3.14
+
+  File "/usr/lib/python3.14/site-packages/fedora/client/proxyclient.py", line 339, in send_request
+    token = sha1(str(session_id))
+TypeError: Strings must be encoded before hashing
+
+
+  File "/usr/lib/python3.14/site-packages/fedora/client/proxyclient.py", line 361, in send_request
+    {'header': str(headers, nonstring='simplerepr')})
+               ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---
+ fedora/client/proxyclient.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fedora/client/proxyclient.py b/fedora/client/proxyclient.py
+index e83e813..dc8029d 100644
+--- a/fedora/client/proxyclient.py
++++ b/fedora/client/proxyclient.py
+@@ -336,7 +336,7 @@ class ProxyClient(object):
+         complete_params = req_params or {}
+         if session_id:
+             # Add the csrf protection token
+-            token = sha1(str(session_id))
++            token = sha1(str(session_id).encode('utf-8'))
+             complete_params.update({'_csrf_token': token.hexdigest()})
+ 
+         auth = None
+@@ -358,7 +358,7 @@ class ProxyClient(object):
+         self.log.debug('Creating request %(url)s' %
+                        {'url': str(url)})
+         self.log.debug('Headers: %(header)s' %
+-                       {'header': str(headers, nonstring='simplerepr')})
++                       {'header': str(headers)})
+         if self.debug and complete_params:
+             debug_data = copy.deepcopy(complete_params)
+ 
+-- 
+2.51.0
+
