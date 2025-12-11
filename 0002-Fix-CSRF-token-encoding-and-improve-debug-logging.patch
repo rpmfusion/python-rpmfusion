@@ -1,7 +1,7 @@
 From dc5344f0e7a2127b78052fa3c3be110dc8b56836 Mon Sep 17 00:00:00 2001
 From: Leigh Scott <leigh123linux@fedoraproject.org>
 Date: Thu, 11 Sep 2025 01:07:31 +0100
-Subject: [PATCH] Fix CSRF token encoding and improve debug logging
+Subject: [PATCH 2/3] Fix CSRF token encoding and improve debug logging
 
 Needed for python-3.14
 
@@ -40,5 +40,5 @@ index e83e813..dc8029d 100644
              debug_data = copy.deepcopy(complete_params)
  
 -- 
-2.51.0
+2.52.0
 

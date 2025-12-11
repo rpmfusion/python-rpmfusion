@@ -6,7 +6,7 @@ and FAS2.\
 
 Name:           python-rpmfusion
 Version:        1.2.2
-Release:        3%{?dist}
+Release:        4%{?dist}
 BuildArch:      noarch
 
 License:        LGPLv2+
@@ -15,6 +15,7 @@ URL:            https://github.com/rpmfusion-infra/python-rpmfusion
 Source0:        https://github.com/rpmfusion-infra/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch1:         0001-Remove-more-unused-translations.patch
 Patch2:         0002-Fix-CSRF-token-encoding-and-improve-debug-logging.patch
+Patch3:         0003-Fix-an-unsupported-escape-sequence-in-a-string-liter.patch
 
 BuildRequires:  gettext
 
@@ -56,6 +57,9 @@ Obsoletes:      python3-fedora < %{version}-%{release}
 %{python3_sitelib}/python_rpmfusion*dist-info
 
 %changelog
+* Thu Dec 11 2025 Sérgio Basto <sergio@serjux.com> - 1.2.2-4
+- Fix an unsupported escape sequence in a string literal in a comment
+
 * Thu Sep 11 2025 Sérgio Basto <sergio@serjux.com> - 1.2.2-3
 - python-3.14 fix
 
