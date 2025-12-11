@@ -12,7 +12,7 @@ BuildArch:      noarch
 License:        LGPLv2+
 Summary:        Python modules for talking to Fedora Infrastructure Services
 URL:            https://github.com/rpmfusion-infra/python-rpmfusion
-Source0:        https://github.com/rpmfusion-infra/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Patch1:         0001-Remove-more-unused-translations.patch
 Patch2:         0002-Fix-CSRF-token-encoding-and-improve-debug-logging.patch
 Patch3:         0003-Fix-an-unsupported-escape-sequence-in-a-string-liter.patch
