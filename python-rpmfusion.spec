@@ -6,7 +6,7 @@ and FAS2.\
 
 Name:           python-rpmfusion
 Version:        1.2.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 BuildArch:      noarch
 
 License:        LGPLv2+
@@ -57,6 +57,9 @@ Obsoletes:      python3-fedora < %{version}-%{release}
 %{python3_sitelib}/python_rpmfusion*dist-info
 
 %changelog
+* Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.2.2-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
+
 * Thu Dec 11 2025 Sérgio Basto <sergio@serjux.com> - 1.2.2-4
 - Fix an unsupported escape sequence in a string literal in a comment
 
