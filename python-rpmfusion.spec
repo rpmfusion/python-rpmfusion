@@ -5,17 +5,14 @@ and FAS2.\
 
 
 Name:           python-rpmfusion
-Version:        1.2.2
-Release:        5%{?dist}
+Version:        1.2.3
+Release:        1%{?dist}
 BuildArch:      noarch
 
 License:        LGPLv2+
 Summary:        Python modules for talking to Fedora Infrastructure Services
 URL:            https://github.com/rpmfusion-infra/python-rpmfusion
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Patch1:         0001-Remove-more-unused-translations.patch
-Patch2:         0002-Fix-CSRF-token-encoding-and-improve-debug-logging.patch
-Patch3:         0003-Fix-an-unsupported-escape-sequence-in-a-string-liter.patch
 
 BuildRequires:  gettext
 
@@ -57,6 +54,9 @@ Obsoletes:      python3-fedora < %{version}-%{release}
 %{python3_sitelib}/python_rpmfusion*dist-info
 
 %changelog
+* Wed May 27 2026 Sérgio Basto <sergio@serjux.com> - 1.2.3-1
+- Update python-rpmfusion to 1.2.3
+
 * Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.2.2-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
 
