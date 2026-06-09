@@ -6,7 +6,7 @@ and FAS2.\
 
 Name:           python-rpmfusion
 Version:        1.2.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 BuildArch:      noarch
 
 License:        LGPLv2+
@@ -54,6 +54,9 @@ Obsoletes:      python3-fedora < %{version}-%{release}
 %{python3_sitelib}/python_rpmfusion*dist-info
 
 %changelog
+* Tue Jun 09 2026 Leigh Scott <leigh123linux@gmail.com> - 1.2.3-2
+- Rebuild for python-3.15
+
 * Wed May 27 2026 Sérgio Basto <sergio@serjux.com> - 1.2.3-1
 - Update python-rpmfusion to 1.2.3
 
