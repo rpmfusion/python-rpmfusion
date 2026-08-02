@@ -6,7 +6,7 @@ and FAS2.\
 
 Name:           python-rpmfusion
 Version:        1.2.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 BuildArch:      noarch
 
 License:        LGPLv2+
@@ -54,6 +54,9 @@ Obsoletes:      python3-fedora < %{version}-%{release}
 %{python3_sitelib}/python_rpmfusion*dist-info
 
 %changelog
+* Sun Aug 02 2026 RPM Fusion Release Engineering <leigh123linux@rpmfusion.org> - 1.2.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_45_Mass_Rebuild
+
 * Tue Jun 09 2026 Leigh Scott <leigh123linux@gmail.com> - 1.2.3-2
 - Rebuild for python-3.15
 
